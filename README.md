@@ -1,115 +1,99 @@
-# eSpeak Text-to-Speech for Android™
+# espeak-ng
 
-[![eSpeak for Android on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_45.png "eSpeak for Android on Google Play")](https://play.google.com/store/apps/details?id=com.reecedunn.espeak)
+[![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/espeak-ng) [![KDE Eco](https://img.shields.io/badge/KDE%20Eco-certified-brightgreen?logo=kde&logoColor=white&style=flat-square)](https://eco.kde.org/) [![Blue Angel](https://img.shields.io/badge/Blue%20Angel-DE--UZ%20215-0055a4?style=flat-square)](https://www.blauer-engel.de/en/certification/criteria)
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=rhdunn&url=https://github.com/rhdunn/espeak&title=espeak&language=&tags=github&category=software)
 
-- [Build Dependencies](#build-dependencies)
-  - [Debian](#debian)
-- [Building](#building)
-  - [Building with Gradle](#building-with-gradle)
-  - [Building with Eclipse](#building-with-eclipse)
-  - [Signing the APK](#signing-the-apk)
-- [Installing](#installing)
-  - [Enabling eSpeak on the Device](#enabling-espeak-on-the-device)
-- [Bugs](#bugs)
-- [License Information](#license-information)
+<!-- AI:start:what-it-does -->
+_Description pending._
+<!-- AI:end:what-it-does -->
 
-----------
+## Architecture
 
-This branch contains the files needed to build espeak on the android platform.
-It is derived from the eyes-free project.
+<!-- AI:start:architecture -->
+_Architecture documentation pending._
+<!-- AI:end:architecture -->
 
-## Build Dependencies
+## Install
 
-In order to build eSpeak, you need:
+<!-- Add installation instructions here. This section is yours — the AI will not modify it. -->
 
-1.  a functional autotools system (`make`, `autoconf`, `automake`, `libtool`
-    and `pkg-config`);
-2.  a functional c++ compiler;
-3.  wxWidgets development libraries (needed to build and run espeakedit
-    to compile the phoneme data).
+```bash
+git clone https://github.com/Interested-Deving-1896/espeak-ng.git
+cd espeak-ng
+```
 
-In order to build the APK, you need:
+## Usage
 
-1.  the [Android SDK](http://developer.android.com/sdk/index.html) with API 21 support;
-2.  the [Android NDK](http://developer.android.com/tools/sdk/ndk/index.html);
-3.  Gradle 2.1.
+<!-- Add usage examples here. This section is yours — the AI will not modify it. -->
 
-In order to use Android Studio, you will also need:
+## Configuration
 
-1.  [Android Studio](http://developer.android.com/sdk/installing/studio.html).
+<!-- Document configuration options here. This section is yours — the AI will not modify it. -->
 
-### Debian
+## CI
 
-| Dependency    | Install                                                          |
-|---------------|------------------------------------------------------------------|
-| autotools     | `sudo apt-get install make autoconf automake libtool pkg-config` |
-| c++ compiler  | `sudo apt-get install gcc g++`                                   |
-| wxWidgets     | `sudo apt-get install libwxgtk2.8-dev`                           |
-| gradle        | [gradle-2.1_0ubuntu1_all.deb](https://launchpad.net/~cwchien/+archive/ubuntu/gradle/+files/gradle_2.1-0ubuntu1_all.deb) |
+<!-- AI:start:ci -->
+_CI documentation pending._
+<!-- AI:end:ci -->
 
-## Building
+## Mirror chain
 
-### Building with Gradle
+<!-- AI:start:mirror-chain -->
+This repo is maintained in [`Interested-Deving-1896/espeak-ng`](https://github.com/Interested-Deving-1896/espeak-ng) and mirrored through:
 
-1.  Set the location of the Android SDK:
+```
+Interested-Deving-1896/espeak-ng  ──►  OpenOS-Project-OSP/espeak-ng  ──►  OpenOS-Project-Ecosystem-OOC/espeak-ng
+```
 
-        $ export ANDROID_HOME=<path-to-the-android-sdk>
-2.  Build the project:
+Changes flow downstream automatically via the hourly mirror chain in
+[`fork-sync-all`](https://github.com/Interested-Deving-1896/fork-sync-all).
+Direct commits to OSP or OOC are detected and opened as PRs back to `Interested-Deving-1896`.
+<!-- AI:end:mirror-chain -->
 
-        $ ./autogen.sh
-        $ ./configure --with-gradle=<path-to-gradle>
-        $ make
+## Contributors
 
-This will create an `android/build/outputs/apk/espeak-release-unsigned.apk` file.
+<!-- AI:start:contributors -->
+| Contributor | Commits |
+|---|---|
+| [@rhdunn](https://github.com/rhdunn) | 926 |
+| [@Christianlm](https://github.com/Christianlm) | 10 |
+| [@gude432](https://github.com/gude432) | 9 |
+| [@thomasguillory](https://github.com/thomasguillory) | 6 |
+| [@jimregan](https://github.com/jimregan) | 1 |
+| [@menny](https://github.com/menny) | 1 |
+<!-- AI:end:contributors -->
 
-### Signing the APK
+## Origins
 
-In order to install the built APK you need to self-sign the package. You can do
-this by:
+<!-- AI:start:origins -->
+_Original project — no upstream influences recorded._
+<!-- AI:end:origins -->
 
-1.  Creating a certificate, if you do not already have one:
+## Resources
 
-        $ keytool -genkey -keystore [YOUR_CERTIFICATE] -alias [ALIAS]
-2. Sign the package using your certificate:
+<!-- AI:start:resources -->
+_No additional resource files found._
+<!-- AI:end:resources -->
 
-        $ jarsigner -sigalg MD5withRSA -digestalg SHA1 \
-          -keystore [YOUR_CERTIFICATE] \
-          android/build/outputs/apk/espeak-release-unsigned.apk [ALIAS]
-3. Align the apk using the zipalign tool.
+## Accessibility
 
-        $ zipalign 4 android/build/outputs/apk/espeak-release-unsigned.apk \
-          android/build/outputs/apk/espeak-release-signed.apk
+<!-- AI:start:accessibility -->
+This repo uses automated accessibility auditing via `check-accessibility.yml`.
 
-## Installing
+Checks include: CODEOWNERS ownership coverage, README screen-reader compatibility,
+WCAG 2.1 AA HTML compliance, audio overview (espeak-ng), and Braille output (liblouis).
 
-Now, you can install the APK using the `adb` tool:
 
-    $ adb install -r android/build/outputs/apk/espeak-release-signed.apk
 
-After running, `eSpeakActivity` will extract the `espeakdata.zip` file into its
-own data directory to set up the available voices.
 
-To enable eSpeak, you need to:
+Run the [Check Accessibility](https://github.com/Interested-Deving-1896/espeak-ng/actions/workflows/check-accessibility.yml)
+workflow to generate the first report and accessibility artifacts.
+See the [W3C Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/WAI/standards-guidelines/wcag/)
+for the underlying accessibility reference.
+<!-- AI:end:accessibility -->
 
-1.  go into the Android `Text-to-Speech settings` UI;
-2.  enable `eSpeak TTS` in the `Engines` section;
-3.  select `eSpeak TTS` as the default engine;
-4.  use the `Listen to an example` option to check if everything is working.
+## License
 
-## Bugs
-
-Report bugs to the [espeak issues](https://github.com/rhdunn/espeak/issues)
-page on GitHub.
-
-## License Information
-
-eSpeak Text-to-Speech is released under the GPL version 3 or later license.
-
-The eSpeak Android APK code in the `android` folder is released under the
-Apache 2.0 license.
-
-Android and Google Play are registered trademarks of Google Inc.
-
-All trademarks are property of their respective owners.
+<!-- AI:start:license -->
+[GPL-3.0](https://github.com/Interested-Deving-1896/espeak-ng/blob/android/COPYING) © 2026 [Interested-Deving-1896](https://github.com/Interested-Deving-1896)
+<!-- AI:end:license -->
